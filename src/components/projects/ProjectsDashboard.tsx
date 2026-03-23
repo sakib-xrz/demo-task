@@ -141,46 +141,133 @@ function TabPlaceholderIcon({ seed }: { seed: string }) {
 function BlurredDashboardMock() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
-      <div className="absolute inset-0 scale-[1.02] p-6 blur-md opacity-[0.52]">
-        <div className="grid grid-cols-3 gap-6 border-b border-slate-100 pb-6">
-          <div>
-            <div className="h-3 w-28 rounded bg-slate-200" />
-            <div className="mt-3 flex items-end gap-2">
-              <div className="h-10 w-16 rounded bg-blue-200" />
-              <div className="h-4 w-12 rounded bg-slate-200" />
+      <div className="absolute inset-0 scale-[1.02] px-7 pt-6 blur-[6px] opacity-60">
+        {/* Top row: DR, Organic Traffic, Keywords */}
+        <div className="grid grid-cols-3 gap-0 border-b border-[#e7ebf1] pb-6">
+          {/* Domain Rating */}
+          <div className="border-r border-[#e7ebf1] pr-6">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[14px] font-medium text-[#3d506e]">Domain Rating (DR)</span>
+              <span className="inline-flex h-[18px] w-[18px] items-center justify-center rounded-full border border-[#c5cdd9] text-[10px] font-semibold text-[#9aa6b8]">i</span>
             </div>
-            <div className="mx-auto mt-2 h-16 w-32 rounded-full border-8 border-slate-200" />
-          </div>
-          <div>
-            <div className="h-3 w-24 rounded bg-slate-200" />
-            <div className="mt-3 h-10 w-24 rounded bg-blue-200" />
-            <div className="mt-2 h-20 rounded bg-slate-100" />
-          </div>
-          <div className="space-y-6">
-            <div>
-              <div className="h-3 w-16 rounded bg-slate-200" />
-              <div className="mt-2 h-9 w-12 rounded bg-blue-200" />
+            <div className="mt-3 flex items-baseline gap-1.5">
+              <span className="text-[48px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">77</span>
+              <span className="text-[16px] font-medium leading-none text-[#24395f]">/100</span>
             </div>
-            <div>
-              <div className="h-3 w-28 rounded bg-slate-200" />
-              <div className="mt-2 h-9 w-12 rounded bg-blue-200" />
+            <div className="mx-auto mt-3 flex justify-center">
+              <svg viewBox="0 0 200 110" className="h-auto w-full max-w-[210px]" aria-hidden>
+                <path d="M 32 95 A 68 68 0 0 1 168 95" fill="none" stroke="#e8ecf2" strokeWidth="18" strokeLinecap="round" />
+                <path d="M 32 95 A 68 68 0 0 1 168 95" fill="none" stroke="#5ba3eb" strokeWidth="18" strokeLinecap="round" strokeDasharray="164.5 214" />
+              </svg>
+            </div>
+          </div>
+          {/* Organic Traffic */}
+          <div className="border-r border-[#e7ebf1] px-6">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[14px] font-medium text-[#3d506e]">Organic traffic</span>
+              <span className="inline-flex h-[18px] w-[18px] items-center justify-center rounded-full border border-[#c5cdd9] text-[10px] font-semibold text-[#9aa6b8]">i</span>
+            </div>
+            <div className="mt-3 flex items-baseline gap-2">
+              <span className="text-[48px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">429.1K</span>
+              <span className="text-[18px] font-semibold leading-none text-[#20a16a]">+22K</span>
+            </div>
+            <div className="mt-4 h-[120px] w-full">
+              <svg viewBox="0 0 280 120" className="h-full w-full" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="mock-area-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.18" />
+                    <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.01" />
+                  </linearGradient>
+                </defs>
+                <path d="M0 90 Q40 85 70 70 T140 50 T210 30 T280 20 V120 H0 Z" fill="url(#mock-area-grad)" />
+                <path d="M0 90 Q40 85 70 70 T140 50 T210 30 T280 20" fill="none" stroke="#2383eb" strokeWidth="2" />
+              </svg>
+            </div>
+          </div>
+          {/* Keywords */}
+          <div className="pl-6">
+            <div className="flex items-center gap-1.5">
+              <span className="text-[14px] font-medium text-[#3d506e]">Keywords</span>
+              <span className="inline-flex h-[18px] w-[18px] items-center justify-center rounded-full border border-[#c5cdd9] text-[10px] font-semibold text-[#9aa6b8]">i</span>
+            </div>
+            <div className="mt-3 flex items-baseline gap-2">
+              <span className="text-[48px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">273</span>
+              <span className="text-[18px] font-semibold leading-none text-[#20a16a]">+18</span>
             </div>
           </div>
         </div>
+
+        {/* AI Citations label */}
         <div className="mt-5 flex items-center gap-2">
-          <div className="h-4 w-40 rounded bg-slate-200" />
+          <span className="text-[16px] font-semibold text-[#24395f]">AI Citations</span>
+          <span className="inline-flex h-[18px] w-[18px] items-center justify-center rounded-full border border-[#c5cdd9] text-[10px] font-semibold text-[#9aa6b8]">i</span>
         </div>
-        <div className="mt-4 grid grid-cols-4 gap-3">
-          {["ChatGPT", "Perplexity", "Gemini", "Copilot"].map((name) => (
-            <div
-              key={name}
-              className="rounded-xl border border-slate-100 bg-white p-3 shadow-sm"
-            >
-              <div className="h-3 w-16 rounded bg-slate-200" />
-              <div className="mt-2 h-7 w-10 rounded bg-blue-200" />
-              <div className="mt-2 h-2 w-full rounded bg-slate-100" />
+
+        {/* AI Citation tiles grid */}
+        <div className="mt-4 grid grid-cols-3 border-t border-[#e7ebf1] pt-4">
+          {/* Col 1: Overview + Gemini */}
+          <div className="border-r border-[#e7ebf1] pr-7">
+            <div className="py-3">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="h-4 w-4 rounded-sm bg-[#4a7cc9]" />
+                <span className="text-[15px] font-semibold text-[#253b62]">Overview</span>
+              </div>
+              <span className="text-[52px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">57</span>
+              <div className="mt-1 flex items-baseline gap-1">
+                <span className="text-[13px] font-medium text-[#5b6a83]">33 pages</span>
+                <span className="text-[13px] font-semibold text-[#f29e30]">-23</span>
+              </div>
             </div>
-          ))}
+            <div className="border-t border-[#e7ebf1] py-3">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="h-4 w-4 rounded-sm bg-[#e44040]" />
+                <span className="text-[15px] font-semibold text-[#253b62]">Gemini</span>
+              </div>
+              <span className="text-[52px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">0</span>
+              <div className="mt-1 flex items-baseline gap-1">
+                <span className="text-[13px] font-medium text-[#5b6a83]">33 pages</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Col 2: ChatGPT + Copilot */}
+          <div className="border-r border-[#e7ebf1] px-7">
+            <div className="py-3">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="h-4 w-4 rounded-sm bg-[#10a37f]" />
+                <span className="text-[15px] font-semibold text-[#253b62]">ChatGPT</span>
+              </div>
+              <span className="text-[52px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">95</span>
+              <div className="mt-1 flex items-baseline gap-1">
+                <span className="text-[13px] font-medium text-[#5b6a83]">33 pages</span>
+                <span className="text-[13px] font-semibold text-[#20a16a]">+12</span>
+              </div>
+            </div>
+            <div className="border-t border-[#e7ebf1] py-3">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="h-4 w-4 rounded-sm bg-[#4a90d9]" />
+                <span className="text-[15px] font-semibold text-[#253b62]">Copilot</span>
+              </div>
+              <span className="text-[52px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">26</span>
+              <div className="mt-1 flex items-baseline gap-1">
+                <span className="text-[13px] font-medium text-[#5b6a83]">33 pages</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Col 3: Perplexity */}
+          <div className="pl-7">
+            <div className="py-3">
+              <div className="mb-3 flex items-center gap-2">
+                <div className="h-4 w-4 rounded-sm bg-[#1a73e8]" />
+                <span className="text-[15px] font-semibold text-[#253b62]">Perplexity</span>
+              </div>
+              <span className="text-[52px] font-bold leading-none tracking-[-0.03em] text-[#1681e4]">73</span>
+              <div className="mt-1 flex items-baseline gap-1">
+                <span className="text-[13px] font-medium text-[#5b6a83]">58 pages</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -462,11 +549,11 @@ export function ProjectsDashboard() {
               );
             })}
           {empty && !projectsLoading && (
-            <div className="relative z-10 -mb-px inline-flex h-[44px] items-center gap-2.5 rounded-t-[16px] border border-b-0 border-[#d9dfe9] bg-white px-6 text-[14px] font-semibold tracking-[-0.01em] text-[#243a62]">
-              <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#bcc6d8] bg-[#f4f7fc] text-[#243a62]">
+            <div className="inline-flex h-[42px] items-center gap-2.5 rounded-full border border-[#d9dfe9] bg-white px-5 text-[14px] font-semibold tracking-[-0.01em] text-[#243a62] shadow-sm">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#bcc6d8] text-[#243a62]">
                 <svg
-                  width="12"
-                  height="12"
+                  width="11"
+                  height="11"
                   viewBox="0 0 24 24"
                   fill="none"
                   aria-hidden
@@ -474,7 +561,7 @@ export function ProjectsDashboard() {
                   <path
                     d="M12 5v14M5 12h14"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                   />
                 </svg>
@@ -550,10 +637,12 @@ export function ProjectsDashboard() {
 
         {/* Main card */}
         <div
-          className={`relative -mt-px overflow-hidden border border-[#d9dfe9] bg-white shadow-sm ${
-            isFirstActive || empty
-              ? "rounded-2xl rounded-tl-none"
-              : "rounded-2xl"
+          className={`relative overflow-hidden border border-[#d9dfe9] bg-white shadow-sm ${
+            isFirstActive && !empty
+              ? "-mt-px rounded-2xl rounded-tl-none"
+              : empty
+                ? "mt-3 rounded-2xl"
+                : "-mt-px rounded-2xl"
           }`}
         >
           {empty ? (
@@ -567,11 +656,13 @@ export function ProjectsDashboard() {
               <div className="relative min-h-[520px]">
                 <BlurredDashboardMock />
                 <div className="relative z-10 flex min-h-[520px] flex-col items-center justify-center px-6 py-16">
-                  <p className="max-w-[500px] text-center text-[14px] font-semibold leading-[1.08] tracking-[-0.02em] text-[#20345a]">
-                    Add your first project to view your Statistics
+                  <p className="max-w-[420px] text-center text-[28px] font-semibold leading-tight tracking-[-0.02em] text-[#20345a]">
+                    Add your first project
+                    <br />
+                    to view your Statistics
                   </p>
-                  <div className="mt-10 w-full max-w-[560px]">
-                    <div className="flex items-center gap-2 rounded-full border-[3px] border-[#3f4acf] bg-white py-3 pl-6 pr-2">
+                  <div className="mt-8 w-full max-w-[420px]">
+                    <div className="flex items-center gap-2 rounded-full border-2 border-[#3f4acf]/40 bg-white py-2.5 pl-6 pr-3">
                       <input
                         value={urlInput}
                         onChange={(e) => setUrlInput(e.target.value)}
@@ -579,13 +670,13 @@ export function ProjectsDashboard() {
                           if (e.key === "Enter") void submitUrl();
                         }}
                         placeholder="Your Website URL"
-                        className="min-w-0 flex-1 border-0 bg-transparent text-[16px] font-medium tracking-[-0.01em] text-[#24395f] outline-none placeholder:text-[#9aa8bd]"
+                        className="min-w-0 flex-1 border-0 bg-transparent text-[15px] font-medium tracking-[-0.01em] text-[#24395f] outline-none placeholder:text-[#9aa8bd]"
                       />
                       <button
                         type="button"
                         onClick={() => void submitUrl()}
                         disabled={creating}
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[#24395f] disabled:opacity-50"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#24395f] disabled:opacity-50"
                         aria-label="Add project"
                       >
                         <IconPlusCircle />

@@ -8,6 +8,7 @@ import {
   useGetTrafficHistoryQuery,
   useCreateDashboardProjectMutation,
 } from "@/store/dashboardApi";
+import { toast } from "sonner";
 import { deltaParts, formatBigNumber } from "@/lib/dashboardFormat";
 import { SemiCircleGauge } from "./SemiCircleGauge";
 import { TrafficAreaChart } from "./TrafficAreaChart";
@@ -358,6 +359,8 @@ export function ProjectsDashboard() {
   const [createProject, { isLoading: creating }] =
     useCreateDashboardProjectMutation();
 
+  const [showAddProject, setShowAddProject] = useState(false);
+
   const empty = !projectsLoading && projects.length === 0;
   const firstProject = projects[0]?.PROJECT;
   const activeProject = useMemo(() => {
@@ -391,8 +394,9 @@ export function ProjectsDashboard() {
       await createProject({ project: v }).unwrap();
       setUrlInput("");
       setUserProject(v);
+      toast.success("Project created successfully");
     } catch {
-      return;
+      toast.error("Failed to create project. Please try again.");
     }
   }
 
@@ -478,10 +482,11 @@ export function ProjectsDashboard() {
               <span className="lowercase">project</span>
             </div>
           )}
-          {!empty && !projectsLoading && (
+          {!empty && !projectsLoading && !showAddProject && (
             <button
               type="button"
-              className="inline-flex h-[42px] items-center gap-2.5 rounded-full bg-[#eef2f9] px-5 text-[14px] font-semibold tracking-[-0.01em] text-[#2b3e61]"
+              onClick={() => setShowAddProject(true)}
+              className="inline-flex h-[42px] items-center gap-2.5 rounded-full bg-[#eef2f9] px-5 text-[14px] font-semibold tracking-[-0.01em] text-[#2b3e61] transition-colors hover:bg-[#e4eaf4]"
             >
               <span className="flex h-7 w-7 items-center justify-center rounded-full border border-[#bcc6d8] bg-white text-[#243a62]">
                 <svg
@@ -501,6 +506,45 @@ export function ProjectsDashboard() {
               </span>
               <span className="lowercase">project</span>
             </button>
+          )}
+          {!empty && !projectsLoading && showAddProject && (
+            <div className="inline-flex h-[42px] items-center gap-2 rounded-full border-2 border-[#3f4acf] bg-white px-3">
+              <input
+                value={urlInput}
+                onChange={(e) => setUrlInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") void submitUrl().then(() => setShowAddProject(false));
+                  if (e.key === "Escape") {
+                    setShowAddProject(false);
+                    setUrlInput("");
+                  }
+                }}
+                placeholder="Website URL"
+                autoFocus
+                className="min-w-0 w-[180px] border-0 bg-transparent text-[14px] font-medium tracking-[-0.01em] text-[#24395f] outline-none placeholder:text-[#9aa8bd]"
+              />
+              <button
+                type="button"
+                onClick={() => void submitUrl().then(() => setShowAddProject(false))}
+                disabled={creating || !urlInput.trim()}
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#3f4acf] text-white disabled:opacity-40"
+                aria-label="Add project"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                onClick={() => { setShowAddProject(false); setUrlInput(""); }}
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[#9aa8bd] hover:text-[#24395f]"
+                aria-label="Cancel"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
           )}
         </div>
 
@@ -722,14 +766,23 @@ export function ProjectsDashboard() {
               </div>
 
               {/* AI Citations */}
-              <div className="px-7 pb-7 pt-5">
+              <div className="relative px-7 pb-7 pt-5">
                 <div className="mb-0 flex items-center gap-2">
                   <h2 className="text-[16px] font-semibold tracking-[-0.02em] text-[#24395f]">
-                    AI citations
+                    AI Citations
                   </h2>
                   <InfoIcon />
                 </div>
-                <AiCitationsSection />
+                <div className="relative">
+                  <div className="pointer-events-none select-none blur-[6px] opacity-50">
+                    <AiCitationsSection />
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-[22px] font-semibold tracking-[-0.02em] text-[#243659]">
+                      AI Citations coming soon
+                    </span>
+                  </div>
+                </div>
               </div>
             </>
           )}

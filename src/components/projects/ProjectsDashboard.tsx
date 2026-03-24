@@ -627,7 +627,7 @@ export function ProjectsDashboard() {
                 </header>
 
                 {/* Project tabs */}
-                <div className="relative z-20 -mb-px mt-7 flex w-full items-end overflow-x-auto px-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
+                <div className="relative z-20 -mb-px mt-7 flex w-full items-end overflow-x-auto px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
                     {projectsLoading && (
                         <div className="mx-1 h-[42px] w-44 animate-pulse rounded-full bg-[#dfe6f1]" />
                     )}

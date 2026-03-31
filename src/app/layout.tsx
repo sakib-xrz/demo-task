@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#f8fafc] font-sans text-slate-900">
+      <body className="min-h-full flex flex-col bg-[#FFFFFF] font-sans text-slate-900">
         <StoreProvider>{children}</StoreProvider>
         <Toaster position="top-right" richColors />
       </body>

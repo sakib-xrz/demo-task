@@ -10,7 +10,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Dashboard - Projects",
   description: "Dashboard projects",
 };
 

@@ -587,8 +587,8 @@ export function ProjectsDashboard() {
   const contentBusy = metricsFetching || trafficFetching;
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF] px-6 pb-14 pt-8 text-[#243659] sm:px-8">
-      <div className="mx-auto max-w-257.5">
+    <div className="min-h-screen flex items-start sm:items-center justify-center py-6 px-4 sm:py-8 sm:px-8 bg-[#F9FAFB]">
+      <div className="bg-white rounded-[20px] p-3 w-full max-w-[800px]">
         {/* Header */}
         <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-2xl font-semibold tracking-[-0.02em] text-[#2B456B]">
@@ -803,7 +803,7 @@ export function ProjectsDashboard() {
         </div>
 
         {/* Main card */}
-        <div className="relative overflow-hidden rounded-2xl border border-[#d9dfe9] bg-white shadow-sm sm:rounded-3xl">
+        <div className="relative overflow-hidden rounded-2xl border border-[#d9dfe9] bg-white sm:rounded-3xl">
           {empty ? (
             <>
               <div className="relative z-20 flex items-center gap-2 border-b border-[#e7ebf1] px-7 py-5">

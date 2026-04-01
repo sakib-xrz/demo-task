@@ -595,30 +595,32 @@ export function ProjectsDashboard() {
     <div className="min-h-screen flex items-start sm:items-center justify-center py-6 px-4 sm:py-8 sm:px-8 bg-[#F9FAFB]">
       <div className="bg-white rounded-[20px] p-3 w-full max-w-[800px]">
         {/* Header */}
-        <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-2xl font-semibold tracking-[-0.02em] text-[#2B456B]">
-            Projekte
-          </h1>
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className="inline-flex h-10.5 items-center gap-2.5 rounded-full bg-[#F5F8FA] px-6 text-base font-semibold text-[#2B456B] tracking-[-0.01em]"
-            >
-              <IconLineChart className="h-5 w-5 text-[#2a3f65]" />
-              Detailed Analytics
-            </button>
-            <button
-              type="button"
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F5F8FA] text-[#2B456B]"
-              aria-label="Open"
-            >
-              <IconArrowUpRight className="h-4.5 w-4.5 text-[#2a3f65]" />
-            </button>
-          </div>
-        </header>
+        <div className="px-4 pt-4">
+          <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h1 className="text-2xl font-semibold tracking-[-0.02em] text-[#2B456B]">
+              Projekte
+            </h1>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                className="inline-flex h-10.5 items-center gap-2.5 rounded-full bg-[#F5F8FA] px-6 text-base font-semibold text-[#2B456B] tracking-[-0.01em] cursor-pointer"
+              >
+                <IconLineChart className="h-5 w-5 text-[#2a3f65]" />
+                Detailed Analytics
+              </button>
+              <button
+                type="button"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F5F8FA] text-[#2B456B] cursor-pointer"
+                aria-label="Open"
+              >
+                <IconArrowUpRight className="h-4.5 w-4.5 text-[#2a3f65]" />
+              </button>
+            </div>
+          </header>
+        </div>
 
         {/* Project tabs */}
-        <div className="relative z-20 -mb-px mt-7 flex w-full items-end overflow-x-auto px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
+        <div className="relative z-20 -mb-px mt-5 flex w-full items-end overflow-x-auto px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
           {projectsLoading && (
             <div className="mx-1 h-10.5 w-44 animate-pulse rounded-full bg-[#dfe6f1]" />
           )}
@@ -648,7 +650,7 @@ export function ProjectsDashboard() {
                     <button
                       type="button"
                       onClick={() => setUserProject(p.PROJECT)}
-                      className="flex items-center gap-2 rounded-full border-2 border-[#3E4FEA] bg-[#3E4FEA]/10 px-5 py-1.5 text-[14px] font-semibold text-[#3E4FEA] transition-all"
+                      className="flex items-center gap-2 rounded-full border-2 border-[#3E4FEA] bg-[#3E4FEA]/10 px-5 py-1.5 text-[14px] font-semibold text-[#3E4FEA] transition-all cursor-pointer"
                     >
                       {iconNode}
                       <span className="max-w-47.5 truncate whitespace-nowrap">
@@ -698,7 +700,7 @@ export function ProjectsDashboard() {
                   key={p.PROJECT}
                   type="button"
                   onClick={() => setUserProject(p.PROJECT)}
-                  className="z-10 mx-1 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] first:ml-0"
+                  className="z-10 mx-1 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] first:ml-0 cursor-pointer"
                 >
                   {iconNode}
                   <span className="max-w-47.5 truncate whitespace-nowrap">
@@ -732,7 +734,7 @@ export function ProjectsDashboard() {
             <button
               type="button"
               onClick={() => setShowAddProject(true)}
-              className="z-10 ml-1 mr-4 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] sm:mr-0"
+              className="z-10 ml-1 mr-4 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] sm:mr-0 cursor-pointer"
             >
               <IconPlusCircle className="h-4.5 w-4.5" />
               <span>Project</span>
@@ -815,7 +817,7 @@ export function ProjectsDashboard() {
                 <h2 className="text-[16px] font-semibold tracking-[-0.02em] text-[#24395f]">
                   SEO Insights &amp; AI citations
                 </h2>
-                <InfoIcon className="size-4! text-[#ABABAB]!" />
+                <InfoIcon className="size-3.5! text-[#ABABAB]!" />
               </div>
               <div className="relative min-h-130">
                 <BlurredDashboardMock />
@@ -869,7 +871,7 @@ export function ProjectsDashboard() {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="flex cursor-help items-center justify-center">
-                          <InfoIcon className="size-4! text-[#ABABAB]!" />
+                          <InfoIcon className="size-3.5! text-[#ABABAB]!" />
                         </div>
                       </TooltipTrigger>
                       <TooltipContent side="top">
@@ -890,7 +892,7 @@ export function ProjectsDashboard() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <div className="flex cursor-help items-center justify-center">
-                              <InfoIcon className="size-4! text-[#ABABAB]!" />
+                              <InfoIcon className="size-3.5! text-[#ABABAB]!" />
                             </div>
                           </TooltipTrigger>
                           <TooltipContent side="top" className="max-w-[250px]">
@@ -945,7 +947,7 @@ export function ProjectsDashboard() {
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <div className="flex cursor-help items-center justify-center">
-                              <InfoIcon className="size-4! text-[#ABABAB]!" />
+                              <InfoIcon className="size-3.5! text-[#ABABAB]!" />
                             </div>
                           </TooltipTrigger>
                           <TooltipContent side="top">
@@ -993,7 +995,7 @@ export function ProjectsDashboard() {
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <div className="flex cursor-help items-center justify-center">
-                                <InfoIcon className="size-4! text-[#ABABAB]!" />
+                                <InfoIcon className="size-3.5! text-[#ABABAB]!" />
                               </div>
                             </TooltipTrigger>
                             <TooltipContent side="top">
@@ -1033,7 +1035,7 @@ export function ProjectsDashboard() {
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <div className="flex cursor-help items-center justify-center">
-                                  <InfoIcon className="size-4! text-[#ABABAB]!" />
+                                  <InfoIcon className="size-3.5! text-[#ABABAB]!" />
                                 </div>
                               </TooltipTrigger>
                               <TooltipContent side="top">
@@ -1080,7 +1082,7 @@ export function ProjectsDashboard() {
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <div className="flex cursor-help items-center justify-center">
-                        <InfoIcon className="size-4! text-[#ABABAB]!" />
+                        <InfoIcon className="size-3.5! text-[#ABABAB]!" />
                       </div>
                     </TooltipTrigger>
                     <TooltipContent side="top">

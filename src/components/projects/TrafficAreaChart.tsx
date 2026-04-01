@@ -3,7 +3,6 @@
 import {
   Area,
   AreaChart,
-  CartesianGrid,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -36,7 +35,6 @@ export function TrafficAreaChart({ data }: { data: TrafficPoint[] }) {
                 <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.01} />
               </linearGradient>
             </defs>
-            <CartesianGrid vertical={false} stroke="#edf2f7" strokeWidth={1} />
             <XAxis dataKey="date" hide />
             <YAxis hide domain={[domainMin, domainMax]} />
             <Tooltip

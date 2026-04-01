@@ -592,7 +592,7 @@ export function ProjectsDashboard() {
   }
 
   const contentBusy = metricsFetching || trafficFetching;
-  const loadingAnyFetch = projectsLoading || metricsFetching || trafficFetching;
+  const loadingAnyFetch = projectsLoading;
 
   if (loadingAnyFetch) {
     return (

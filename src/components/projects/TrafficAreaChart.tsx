@@ -72,7 +72,8 @@ export function TrafficAreaChart({ data }: { data: TrafficPoint[] }) {
                 strokeWidth: 2,
               }}
               isAnimationActive
-              animationDuration={500}
+              animationDuration={1400}
+              animationEasing="ease-out"
             />
           </AreaChart>
         </ResponsiveContainer>

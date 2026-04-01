@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
 
 export function SemiCircleGauge({
   value,
@@ -11,16 +11,23 @@ export function SemiCircleGauge({
 }) {
   const gid = useId().replace(/:/g, "");
   const pct = Math.min(100, Math.max(0, (value / max) * 100));
+  const [animatedPct, setAnimatedPct] = useState(0);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setAnimatedPct(pct));
+    return () => cancelAnimationFrame(frame);
+  }, [pct]);
+
   const r = 68;
   const cx = 100;
   const cy = 95;
   const arcLen = Math.PI * r;
-  const dash = (pct / 100) * arcLen;
+  const dash = (animatedPct / 100) * arcLen;
 
   return (
     <svg
       viewBox="0 0 200 110"
-      className="mx-auto h-auto w-full max-w-[210px]"
+      className="mx-auto h-auto w-full max-w-52.5"
       aria-hidden
     >
       <defs>
@@ -46,6 +53,7 @@ export function SemiCircleGauge({
         strokeWidth="18"
         strokeLinecap="round"
         strokeDasharray={`${dash} ${arcLen + 1}`}
+        style={{ transition: "stroke-dasharray 1200ms ease-out" }}
       />
     </svg>
   );

@@ -12,7 +12,11 @@ import { toast } from "sonner";
 import { deltaParts, formatBigNumber } from "@/lib/dashboardFormat";
 import { SemiCircleGauge } from "./SemiCircleGauge";
 import { TrafficAreaChart } from "./TrafficAreaChart";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
 function InfoIcon({ className }: { className?: string }) {
   return (
@@ -849,7 +853,7 @@ export function ProjectsDashboard() {
           ) : (
             <>
               {/* SEO Insights */}
-              <div className="border-b border-[#e7ebf1] px-7 pb-7 pt-6">
+              <div className="px-7 pt-6">
                 <div
                   key={activeProject ?? "x"}
                   className="dashboard-tab-panel"
@@ -883,7 +887,17 @@ export function ProjectsDashboard() {
                     <div className="border-[#e7ebf1] pb-4 lg:border-r lg:pb-0 lg:pr-6">
                       <div className="flex items-center gap-1.5 text-sm font-normal tracking-[-0.01em] text-[#2B456B]">
                         <span>Domain Rating (DR)</span>
-                        <InfoIcon className="size-4! text-[#ABABAB]!" />
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="flex cursor-help items-center justify-center">
+                              <InfoIcon className="size-4! text-[#ABABAB]!" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="max-w-[250px]">
+                            Domain Rating measures the strength of a
+                            website&apos;s backlink profile
+                          </TooltipContent>
+                        </Tooltip>
                       </div>
                       {metrics && (
                         <>
@@ -928,7 +942,16 @@ export function ProjectsDashboard() {
                     <div className="border-t border-[#e7ebf1] pt-5 lg:border-r lg:border-t-0 lg:px-6 lg:pt-0">
                       <div className="flex items-center gap-1.5 text-sm font-normal tracking-[-0.01em] text-[#2B456B]">
                         <span>Organic traffic</span>
-                        <InfoIcon className="size-4! text-[#ABABAB]!" />
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="flex cursor-help items-center justify-center">
+                              <InfoIcon className="size-4! text-[#ABABAB]!" />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent side="top">
+                            Estimated monthly organic search traffic
+                          </TooltipContent>
+                        </Tooltip>
                       </div>
                       {metrics && (
                         <>
@@ -967,7 +990,16 @@ export function ProjectsDashboard() {
                       <div>
                         <div className="flex items-center gap-1.5 text-sm font-normal tracking-[-0.01em] text-[#2B456B]">
                           <span>Keywords</span>
-                          <InfoIcon className="size-4! text-[#ABABAB]!" />
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="flex cursor-help items-center justify-center">
+                                <InfoIcon className="size-4! text-[#ABABAB]!" />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent side="top">
+                              Number of keywords this site ranks for
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                         {metrics && (
                           <div className="mt-3 flex items-baseline gap-2">
@@ -998,7 +1030,16 @@ export function ProjectsDashboard() {
                         <div className="border-t border-[#e7ebf1] pt-6">
                           <div className="flex items-center gap-1.5 text-sm font-normal tracking-[-0.01em] text-[#2B456B]">
                             <span>Referring Domains</span>
-                            <InfoIcon className="size-4! text-[#ABABAB]!" />
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <div className="flex cursor-help items-center justify-center">
+                                  <InfoIcon className="size-4! text-[#ABABAB]!" />
+                                </div>
+                              </TooltipTrigger>
+                              <TooltipContent side="top">
+                                Number of unique domains linking to this site
+                              </TooltipContent>
+                            </Tooltip>
                           </div>
                           {metrics && (
                             <div className="mt-3 flex items-baseline gap-2">
@@ -1031,14 +1072,15 @@ export function ProjectsDashboard() {
               </div>
 
               {/* AI Citations */}
-              <div className="relative px-7 pb-7 pt-5">
-                <div className="mb-0 flex items-center gap-2">
+              <div className="relative p-5">
+                <div className="mb-2 flex items-center gap-2">
                   <h2 className="text-[16px] font-semibold tracking-[-0.02em] text-[#24395f]">
                     AI Citations
                   </h2>
                   <InfoIcon className="size-4! text-[#ABABAB]!" />
                 </div>
-                <div className="relative">
+                <hr className="h-1 text-[#E9EAEB] mb-4" />
+                <div className="relative border border-[#e7ebf1] rounded-lg px-5">
                   <div className="pointer-events-none select-none blur-[6px] opacity-50">
                     <AiCitationsSection />
                   </div>

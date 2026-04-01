@@ -1077,7 +1077,16 @@ export function ProjectsDashboard() {
                   <h2 className="text-[16px] font-semibold tracking-[-0.02em] text-[#24395f]">
                     AI Citations
                   </h2>
-                  <InfoIcon className="size-4! text-[#ABABAB]!" />
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="flex cursor-help items-center justify-center">
+                        <InfoIcon className="size-4! text-[#ABABAB]!" />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                      AI citation metrics across different platforms
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
                 <hr className="h-1 text-[#E9EAEB] mb-4" />
                 <div className="relative border border-[#e7ebf1] rounded-lg px-5">

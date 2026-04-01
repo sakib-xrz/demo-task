@@ -604,9 +604,10 @@ export function ProjectsDashboard() {
 
   return (
     <div className="min-h-screen flex items-start sm:items-center justify-center py-6 px-4 sm:py-8 sm:px-8 bg-[#F9FAFB]">
-      <div className="bg-white rounded-[20px] p-3 w-full max-w-200">
+      <div className="dashboard-shell relative w-full max-w-200 overflow-hidden rounded-[20px] bg-white p-3">
+        <div className="dashboard-ambient pointer-events-none absolute inset-0" aria-hidden />
         {/* Header */}
-        <div className="px-4 pt-4">
+        <div className="dashboard-section-reveal dashboard-delay-1 relative z-10 px-4 pt-4">
           <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <h1 className="text-2xl font-semibold tracking-[-0.02em] text-[#2B456B]">
               Projekte
@@ -631,7 +632,7 @@ export function ProjectsDashboard() {
         </div>
 
         {/* Project tabs */}
-        <div className="relative z-20 -mb-px mt-5 flex w-full items-end gap-2 overflow-x-auto px-10 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
+  <div className="dashboard-section-reveal dashboard-delay-2 relative z-20 -mb-px mt-5 flex w-full items-end gap-2 overflow-x-auto px-10 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
           {projectsLoading && (
             <div className="mx-1 h-10.5 w-44 animate-pulse rounded-full bg-[#dfe6f1]" />
           )}
@@ -665,7 +666,7 @@ export function ProjectsDashboard() {
                         setUserProject(p.PROJECT);
                         setShowAddProject(false);
                       }}
-                      className="flex items-center gap-2 rounded-full border border-[#3E4FEA] bg-[#3E4FEA]/10 mb-1.5 px-5 py-1.5 text-[14px] font-semibold text-[#3E4FEA] transition-all cursor-pointer"
+                      className="flex items-center gap-2 rounded-full border border-[#3E4FEA] bg-[#3e4fea1a] mb-1.5 px-5 py-1.5 text-[14px] font-medium text-[#3E4FEA] transition-all cursor-pointer"
                     >
                       {iconNode}
                       <span className="max-w-47.5 truncate whitespace-nowrap">
@@ -799,7 +800,7 @@ export function ProjectsDashboard() {
         </div>
 
         {/* Main card */}
-        <div className="relative overflow-hidden rounded-2xl border border-[#d9dfe9] bg-white sm:rounded-3xl">
+        <div className="dashboard-section-reveal dashboard-delay-3 relative overflow-hidden rounded-2xl border border-[#d9dfe9] bg-white sm:rounded-3xl">
           {empty || showAddProject ? (
             <>
               <div className="relative z-20 flex items-center gap-2 border-b border-[#e7ebf1] px-7 py-5">
@@ -849,13 +850,18 @@ export function ProjectsDashboard() {
           ) : (
             <>
               {/* SEO Insights */}
-              <div className="px-7 pt-6">
+              <div className="dashboard-section-reveal dashboard-delay-4 px-7 pt-6">
                 <div
                   key={activeProject ?? "x"}
                   className="dashboard-tab-panel"
                   style={{
                     opacity: contentBusy ? 0.65 : 1,
-                    transition: "opacity 0.42s ease",
+                    transform: contentBusy
+                      ? "translateY(3px) scale(0.992)"
+                      : "translateY(0) scale(1)",
+                    filter: contentBusy ? "saturate(0.93)" : "saturate(1)",
+                    transition:
+                      "opacity 0.42s ease, transform 0.42s ease, filter 0.42s ease",
                   }}
                 >
                   <div className="mb-2 flex items-center gap-2">
@@ -1068,7 +1074,7 @@ export function ProjectsDashboard() {
               </div>
 
               {/* AI Citations */}
-              <div className="relative p-5">
+              <div className="dashboard-section-reveal dashboard-delay-5 relative p-5">
                 <div className="mb-2 flex items-center gap-2">
                   <h2 className="text-[16px] font-semibold tracking-[-0.02em] text-[#24395f]">
                     AI Citations

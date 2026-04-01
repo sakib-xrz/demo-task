@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { deltaParts, formatBigNumber } from "@/lib/dashboardFormat";
 import { SemiCircleGauge } from "./SemiCircleGauge";
 import { TrafficAreaChart } from "./TrafficAreaChart";
+import { ProjectsDashboardSkeleton } from "./ProjectsDashboardSkeleton";
 import {
   Tooltip,
   TooltipTrigger,
@@ -146,7 +147,7 @@ function TabPlaceholderIcon({ seed }: { seed: string }) {
 function BlurredDashboardMock() {
   return (
     <div className="pointer-events-none select-none overflow-hidden rounded-b-2xl sm:rounded-b-3xl">
-      <div className="px-7 pt-6 blur-[8px] opacity-25">
+      <div className="px-7 pt-6 blur-sm opacity-25">
         {/* Top row: DR, Organic Traffic, Keywords */}
         <div className="grid grid-cols-3 gap-0 border-b border-[#e7ebf1] pb-6">
           {/* Domain Rating */}
@@ -591,10 +592,19 @@ export function ProjectsDashboard() {
   }
 
   const contentBusy = metricsFetching || trafficFetching;
+  const loadingAnyFetch = projectsLoading || metricsFetching || trafficFetching;
+
+  if (loadingAnyFetch) {
+    return (
+      <div className="min-h-screen flex items-start sm:items-center justify-center py-6 px-4 sm:py-8 sm:px-8 bg-[#F9FAFB]">
+        <ProjectsDashboardSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-start sm:items-center justify-center py-6 px-4 sm:py-8 sm:px-8 bg-[#F9FAFB]">
-      <div className="bg-white rounded-[20px] p-3 w-full max-w-[800px]">
+      <div className="bg-white rounded-[20px] p-3 w-full max-w-200">
         {/* Header */}
         <div className="px-4 pt-4">
           <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -621,7 +631,7 @@ export function ProjectsDashboard() {
         </div>
 
         {/* Project tabs */}
-        <div className="relative z-20 -mb-px mt-5 flex w-full items-end overflow-x-auto px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
+        <div className="relative z-20 -mb-px mt-5 flex w-full items-end gap-2 overflow-x-auto px-10 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:none]">
           {projectsLoading && (
             <div className="mx-1 h-10.5 w-44 animate-pulse rounded-full bg-[#dfe6f1]" />
           )}
@@ -655,7 +665,7 @@ export function ProjectsDashboard() {
                         setUserProject(p.PROJECT);
                         setShowAddProject(false);
                       }}
-                      className="flex items-center gap-2 rounded-full border-2 border-[#3E4FEA] bg-[#3E4FEA]/10 px-5 py-1.5 text-[14px] font-semibold text-[#3E4FEA] transition-all cursor-pointer"
+                      className="flex items-center gap-2 rounded-full border border-[#3E4FEA] bg-[#3E4FEA]/10 mb-1.5 px-5 py-1.5 text-[14px] font-semibold text-[#3E4FEA] transition-all cursor-pointer"
                     >
                       {iconNode}
                       <span className="max-w-47.5 truncate whitespace-nowrap">
@@ -708,7 +718,7 @@ export function ProjectsDashboard() {
                     setUserProject(p.PROJECT);
                     setShowAddProject(false);
                   }}
-                  className="z-10 mx-1 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] first:ml-0 cursor-pointer"
+                  className="z-10 mx-1 mb-2 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] first:ml-0 cursor-pointer"
                 >
                   {iconNode}
                   <span className="max-w-47.5 truncate whitespace-nowrap">
@@ -718,7 +728,7 @@ export function ProjectsDashboard() {
               );
             })}
           {empty && !projectsLoading && (
-            <div className="z-10 mx-1 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B]">
+            <div className="z-10 mx-1 mb-2 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B]">
               <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[#3E4FEA] text-[#243a62]">
                 <svg
                   width="11"
@@ -742,7 +752,7 @@ export function ProjectsDashboard() {
             <button
               type="button"
               onClick={() => setShowAddProject(true)}
-              className="z-10 ml-1 mr-4 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] sm:mr-0 cursor-pointer"
+              className="z-10 ml-1 mr-4 mb-2 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] sm:mr-0 cursor-pointer"
             >
               <IconPlusCircle className="h-4.5 w-4.5" />
               <span>Project</span>
@@ -806,7 +816,7 @@ export function ProjectsDashboard() {
                     <br />
                     to view your Statistics
                   </p>
-                  <div className="mt-5 w-full max-w-[400px]">
+                  <div className="mt-5 w-full max-w-100">
                     <div className="flex items-center gap-2 rounded-[30px] border border-[#5468ff] bg-white py-3 pl-6 pr-3 shadow-[0_4px_20px_-4px_rgba(84,104,255,0.06)] focus-within:ring-1 focus-within:ring-[#5468ff] transition-shadow">
                       <input
                         value={urlInput}
@@ -879,7 +889,7 @@ export function ProjectsDashboard() {
                               <InfoIcon className="size-3.5! text-[#ABABAB]!" />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent side="top" className="max-w-[250px]">
+                          <TooltipContent side="top" className="max-w-62.5">
                             Domain Rating measures the strength of a
                             website&apos;s backlink profile
                           </TooltipContent>

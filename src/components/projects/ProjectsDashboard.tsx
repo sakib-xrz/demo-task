@@ -86,12 +86,12 @@ function IconPlusCircle({ className }: { className?: string }) {
         cx="12"
         cy="12"
         r="9"
-        className="stroke-[#263B63]"
+        className="stroke-current"
         strokeWidth="1.8"
       />
       <path
         d="M12 8v8M8 12h8"
-        className="stroke-[#263B63]"
+        className="stroke-current"
         strokeWidth="1.8"
         strokeLinecap="round"
       />
@@ -145,8 +145,8 @@ function TabPlaceholderIcon({ seed }: { seed: string }) {
 
 function BlurredDashboardMock() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-2xl">
-      <div className="absolute inset-0 scale-[1.02] px-7 pt-6 blur-[6px] opacity-60">
+    <div className="pointer-events-none select-none overflow-hidden rounded-b-2xl sm:rounded-b-3xl">
+      <div className="px-7 pt-6 blur-[8px] opacity-25">
         {/* Top row: DR, Organic Traffic, Keywords */}
         <div className="grid grid-cols-3 gap-0 border-b border-[#e7ebf1] pb-6">
           {/* Domain Rating */}
@@ -583,6 +583,7 @@ export function ProjectsDashboard() {
       await createProject({ project: v }).unwrap();
       setUrlInput("");
       setUserProject(v);
+      setShowAddProject(false);
       toast.success("Project created successfully");
     } catch {
       toast.error("Failed to create project. Please try again.");
@@ -626,7 +627,8 @@ export function ProjectsDashboard() {
           )}
           {!projectsLoading &&
             projects.map((p, index) => {
-              const active = p.PROJECT === activeProject && !empty;
+              const active =
+                p.PROJECT === activeProject && !empty && !showAddProject;
 
               const iconNode = p.THUMBNAIL ? (
                 <span
@@ -649,7 +651,10 @@ export function ProjectsDashboard() {
                   >
                     <button
                       type="button"
-                      onClick={() => setUserProject(p.PROJECT)}
+                      onClick={() => {
+                        setUserProject(p.PROJECT);
+                        setShowAddProject(false);
+                      }}
                       className="flex items-center gap-2 rounded-full border-2 border-[#3E4FEA] bg-[#3E4FEA]/10 px-5 py-1.5 text-[14px] font-semibold text-[#3E4FEA] transition-all cursor-pointer"
                     >
                       {iconNode}
@@ -699,7 +704,10 @@ export function ProjectsDashboard() {
                 <button
                   key={p.PROJECT}
                   type="button"
-                  onClick={() => setUserProject(p.PROJECT)}
+                  onClick={() => {
+                    setUserProject(p.PROJECT);
+                    setShowAddProject(false);
+                  }}
                   className="z-10 mx-1 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full bg-[#F5F8FA] px-5 text-[14px] font-medium text-[#2B456B] transition-colors hover:bg-[#e2e8f0] first:ml-0 cursor-pointer"
                 >
                   {iconNode}
@@ -741,77 +749,48 @@ export function ProjectsDashboard() {
             </button>
           )}
           {!empty && !projectsLoading && showAddProject && (
-            <div className="z-20 ml-1 mb-1.5 inline-flex h-10.5 shrink-0 items-center gap-2 rounded-full border-2 border-[#3f4acf] bg-white px-3">
-              <input
-                value={urlInput}
-                onChange={(e) => setUrlInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter")
-                    void submitUrl().then(() => setShowAddProject(false));
-                  if (e.key === "Escape") {
-                    setShowAddProject(false);
-                    setUrlInput("");
-                  }
-                }}
-                placeholder="Website URL"
-                autoFocus
-                className="min-w-0 w-45 border-0 bg-transparent text-[14px] font-medium tracking-[-0.01em] text-[#24395f] outline-none placeholder:text-[#9aa8bd]"
-              />
+            <div className="relative z-30 mx-1 shrink-0 rounded-t-[20px] border border-b-0 border-[#d9dfe9] bg-white p-1.5 ml-1 mr-4 sm:mr-0">
               <button
                 type="button"
-                onClick={() =>
-                  void submitUrl().then(() => setShowAddProject(false))
-                }
-                disabled={creating || !urlInput.trim()}
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#3f4acf] text-white disabled:opacity-40"
-                aria-label="Add project"
+                onClick={() => setShowAddProject(false)}
+                className="flex items-center gap-2 rounded-full border border-[#5468ff] bg-white px-5 py-1.5 text-[14px] font-medium text-[#5468ff] transition-all cursor-pointer"
               >
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M12 5v14M5 12h14"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <IconPlusCircle className="h-4.5 w-4.5" />
+                <span>Project</span>
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowAddProject(false);
-                  setUrlInput("");
-                }}
-                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[#9aa8bd] hover:text-[#24395f]"
-                aria-label="Cancel"
+              <svg
+                className="absolute -left-4 w-4 h-4 bottom-0"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden
-                >
-                  <path
-                    d="M6 6l12 12M6 18L18 6"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
+                <path d="M16 0V16H0C8.83656 16 16 8.83656 16 0Z" fill="white" />
+                <path
+                  d="M0 16C8.83656 16 16 8.83656 16 0"
+                  stroke="#d9dfe9"
+                  strokeWidth="1"
+                />
+              </svg>
+              <svg
+                className="absolute -right-4 bottom-0 h-4 w-4"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 0V16H16C7.16344 16 0 8.83656 0 0Z" fill="white" />
+                <path
+                  d="M16 16C7.16344 16 0 8.83656 0 0"
+                  stroke="#d9dfe9"
+                  strokeWidth="1"
+                />
+              </svg>
             </div>
           )}
         </div>
 
         {/* Main card */}
         <div className="relative overflow-hidden rounded-2xl border border-[#d9dfe9] bg-white sm:rounded-3xl">
-          {empty ? (
+          {empty || showAddProject ? (
             <>
               <div className="relative z-20 flex items-center gap-2 border-b border-[#e7ebf1] px-7 py-5">
                 <h2 className="text-[16px] font-semibold tracking-[-0.02em] text-[#24395f]">
@@ -819,33 +798,38 @@ export function ProjectsDashboard() {
                 </h2>
                 <InfoIcon className="size-3.5! text-[#ABABAB]!" />
               </div>
-              <div className="relative min-h-130">
+              <div className="relative">
                 <BlurredDashboardMock />
-                <div className="relative z-10 flex min-h-130 flex-col items-center justify-center px-6 py-16">
-                  <p className="max-w-105 text-center text-[28px] font-semibold leading-tight tracking-[-0.02em] text-[#20345a]">
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-6">
+                  <p className="text-[#1c2e4f] text-[18px] sm:text-[24px] font-medium text-center leading-snug">
                     Add your first project
                     <br />
                     to view your Statistics
                   </p>
-                  <div className="mt-8 w-full max-w-105">
-                    <div className="flex items-center gap-2 rounded-full border-2 border-[#3f4acf]/40 bg-white py-2.5 pl-6 pr-3">
+                  <div className="mt-5 w-full max-w-[400px]">
+                    <div className="flex items-center gap-2 rounded-[30px] border border-[#5468ff] bg-white py-3 pl-6 pr-3 shadow-[0_4px_20px_-4px_rgba(84,104,255,0.06)] focus-within:ring-1 focus-within:ring-[#5468ff] transition-shadow">
                       <input
                         value={urlInput}
                         onChange={(e) => setUrlInput(e.target.value)}
                         onKeyDown={(e) => {
                           if (e.key === "Enter") void submitUrl();
+                          if (e.key === "Escape" && showAddProject) {
+                            setShowAddProject(false);
+                            setUrlInput("");
+                          }
                         }}
+                        autoFocus={showAddProject}
                         placeholder="Your Website URL"
-                        className="min-w-0 flex-1 border-0 bg-transparent text-[15px] font-medium tracking-[-0.01em] text-[#24395f] outline-none placeholder:text-[#9aa8bd]"
+                        className="min-w-0 flex-1 border-0 bg-transparent text-[15px] font-medium tracking-[-0.01em] text-[#1c2e4f] outline-none placeholder:text-[#9aa8be]"
                       />
                       <button
                         type="button"
                         onClick={() => void submitUrl()}
                         disabled={creating}
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#24395f] disabled:opacity-50"
+                        className="flex shrink-0 items-center justify-center text-[#5468ff] transition-opacity disabled:opacity-50"
                         aria-label="Add project"
                       >
-                        <IconPlusCircle />
+                        <IconPlusCircle className="h-6 w-6" />
                       </button>
                     </div>
                   </div>

@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { deltaParts, formatBigNumber } from "@/lib/dashboardFormat";
 import { SemiCircleGauge } from "./SemiCircleGauge";
 import { TrafficAreaChart } from "./TrafficAreaChart";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 function InfoIcon({ className }: { className?: string }) {
   return (
@@ -861,7 +862,18 @@ export function ProjectsDashboard() {
                     <h2 className="text-base font-semibold tracking-[-0.02em] text-[#2B456B]">
                       SEO Insights
                     </h2>
-                    <InfoIcon className="size-4! text-[#ABABAB]!" />
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex cursor-help items-center justify-center">
+                          <InfoIcon className="size-4! text-[#ABABAB]!" />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="top">
+                        Search engine optimization metrics
+                        <br />
+                        for this project
+                      </TooltipContent>
+                    </Tooltip>
                   </div>
 
                   <hr className="h-1 text-[#E9EAEB] mb-4" />

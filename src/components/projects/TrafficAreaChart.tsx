@@ -5,6 +5,7 @@ import {
   AreaChart,
   CartesianGrid,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
@@ -36,8 +37,24 @@ export function TrafficAreaChart({ data }: { data: TrafficPoint[] }) {
               </linearGradient>
             </defs>
             <CartesianGrid vertical={false} stroke="#edf2f7" strokeWidth={1} />
-            <XAxis hide />
+            <XAxis dataKey="date" hide />
             <YAxis hide domain={[domainMin, domainMax]} />
+            <Tooltip
+              content={({ active, payload, label }: any) => {
+                if (active && payload && payload.length) {
+                  return (
+                    <div className="rounded-xl border border-gray-100 bg-white px-3 py-2 shadow-sm">
+                      <div className="mb-0.5 text-xs font-semibold text-gray-700">{label}</div>
+                      <div className="text-[13px] font-medium text-[#2383eb]">
+                        Traffic : {payload[0].value}
+                      </div>
+                    </div>
+                  );
+                }
+                return null;
+              }}
+              cursor={{ stroke: "#9ca3af", strokeWidth: 1 }}
+            />
             <Area
               type="monotone"
               dataKey="traffic"
@@ -45,7 +62,7 @@ export function TrafficAreaChart({ data }: { data: TrafficPoint[] }) {
               strokeWidth={2}
               fill="url(#traffic-area)"
               dot={false}
-              activeDot={false}
+              activeDot={{ r: 4, fill: "#2383eb", stroke: "#fff", strokeWidth: 2 }}
               isAnimationActive
               animationDuration={500}
             />
